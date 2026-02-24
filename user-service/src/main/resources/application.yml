@@ -1,0 +1,31 @@
+server:
+  port:8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+  h2:
+    console:
+      enable: true
+      path: /h2
+  jpa:
+    hibernate:
+      ddl-auto: update
+  jta:
+    enabled: false
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+    health:
+      show-details: always
+
+resilience4j:
+  ciruitbreaker:
+    instances:
+      userService:
+        registerHealthIndicator: true
